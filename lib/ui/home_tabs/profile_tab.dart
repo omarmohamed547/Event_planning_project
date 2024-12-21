@@ -2,6 +2,7 @@ import 'package:event_planning_ass/ui/home_tabs/Language_bootom_sheet.dart';
 import 'package:event_planning_ass/utilis/app_style.dart';
 import 'package:event_planning_ass/utilis/asset_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class profileTab extends StatelessWidget {
   profileTab({super.key});
@@ -40,7 +41,7 @@ class profileTab extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Language",
+              AppLocalizations.of(context)!.language,
               style: AppStyle.bold20Black,
             ),
             SizedBox(
@@ -64,7 +65,7 @@ class profileTab extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Arabic",
+                      AppLocalizations.of(context)!.arabic,
                       style: AppStyle.bold20Primary,
                     ),
                     Image.asset(AssetManager.showmoreIcon)
@@ -76,7 +77,7 @@ class profileTab extends StatelessWidget {
               height: height * 0.04,
             ),
             Text(
-              "Theme",
+              AppLocalizations.of(context)!.theme,
               style: AppStyle.bold20Black,
             ),
             SizedBox(
@@ -92,7 +93,7 @@ class profileTab extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Light",
+                    AppLocalizations.of(context)!.light,
                     style: AppStyle.bold20Primary,
                   ),
                   Image.asset(AssetManager.showmoreIcon)

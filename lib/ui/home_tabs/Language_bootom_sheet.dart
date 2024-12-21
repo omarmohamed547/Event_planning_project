@@ -1,5 +1,6 @@
 import 'package:event_planning_ass/utilis/app_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LanguageBootomSheet extends StatelessWidget {
   LanguageBootomSheet({super.key});
@@ -14,14 +15,14 @@ class LanguageBootomSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            "English",
+            AppLocalizations.of(context)!.english,
             style: AppStyle.bold20Primary,
           ),
           SizedBox(
             height: height * 0.02,
           ),
           Text(
-            "Arabic",
+            AppLocalizations.of(context)!.arabic,
             style: AppStyle.bold20Black,
           )
         ],
