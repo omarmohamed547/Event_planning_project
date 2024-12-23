@@ -4,5 +4,20 @@
   "english":"الأنجليزيه",
   "light":"فاتح",
   "dark":"داكن",
-  "theme":"النمط"
+  "theme":"النمط",
+  "wlcome_back":"  مرحبا بالعوده ",
+  "john_safwat":"جون صفوت",
+  "cairo":"القاهره",
+  "egypt":"مصر",
+  "all":"الكل",
+  "sport":"رياضه",
+  "birthday":"عيدميلاد",
+  "metting":"ميعاد",
+  "gaming":"العاب",
+  "workshop":"غرف عمل",
+  "bookclub":"نادي الكتب",
+  "holiday":"اجازه",
+  "eating":"اكل",
+  "exhibition":"معرض"
+
 }
