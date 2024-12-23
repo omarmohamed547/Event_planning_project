@@ -1,21 +1,22 @@
 import 'package:event_planning_ass/providers/app_language_provider.dart';
+import 'package:event_planning_ass/providers/app_theme_provider.dart';
 import 'package:event_planning_ass/utilis/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-class LanguageBootomSheet extends StatefulWidget {
-  LanguageBootomSheet({super.key});
+class ThemeBootomSheet extends StatefulWidget {
+  ThemeBootomSheet({super.key});
 
   @override
-  State<LanguageBootomSheet> createState() => _LanguageBootomSheetState();
+  State<ThemeBootomSheet> createState() => _ThemeBootomSheetState();
 }
 
-class _LanguageBootomSheetState extends State<LanguageBootomSheet> {
+class _ThemeBootomSheetState extends State<ThemeBootomSheet> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
-    var languageProvider = Provider.of<AppLanguageProvider>(context);
+    var themeProvider = Provider.of<AppThemeProvider>(context);
 
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -24,29 +25,30 @@ class _LanguageBootomSheetState extends State<LanguageBootomSheet> {
         children: [
           InkWell(
               onTap: () {
-                languageProvider.changeAppLanguage("en");
+                themeProvider.changeAppTheme(ThemeMode.light);
                 setState(() {});
               },
-              child: languageProvider.appLanguage == "en"
+              child: themeProvider.appTheme == ThemeMode.light
                   ? SelectedWidget(
-                      text: AppLocalizations.of(context)!.english,
+                      text: AppLocalizations.of(context)!.light,
                     )
                   : UnSelectedWidget(
-                      text: AppLocalizations.of(context)!.english,
+                      text: AppLocalizations.of(context)!.light,
                     )),
           SizedBox(
             height: height * 0.02,
           ),
           InkWell(
             onTap: () {
-              languageProvider.changeAppLanguage("ar");
+              themeProvider.changeAppTheme(ThemeMode.dark);
+              setState(() {});
             },
-            child: languageProvider.appLanguage == "ar"
+            child: themeProvider.appTheme == ThemeMode.dark
                 ? SelectedWidget(
-                    text: AppLocalizations.of(context)!.arabic,
+                    text: AppLocalizations.of(context)!.dark,
                   )
                 : UnSelectedWidget(
-                    text: AppLocalizations.of(context)!.arabic,
+                    text: AppLocalizations.of(context)!.dark,
                   ),
           )
         ],

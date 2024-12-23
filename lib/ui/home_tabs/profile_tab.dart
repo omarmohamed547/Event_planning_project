@@ -1,15 +1,28 @@
+import 'package:event_planning_ass/providers/app_language_provider.dart';
+import 'package:event_planning_ass/providers/app_theme_provider.dart';
 import 'package:event_planning_ass/ui/home_tabs/Language_bootom_sheet.dart';
+import 'package:event_planning_ass/ui/home_tabs/Theme_bottom_sheet.dart';
 import 'package:event_planning_ass/utilis/app_style.dart';
 import 'package:event_planning_ass/utilis/asset_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class profileTab extends StatelessWidget {
+class profileTab extends StatefulWidget {
   profileTab({super.key});
 
   @override
+  State<profileTab> createState() => _profileTabState();
+}
+
+class _profileTabState extends State<profileTab> {
+  @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
+    var languageProvider = Provider.of<AppLanguageProvider>(context);
+    var themeProvider = Provider.of<AppThemeProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: height * 0.17,
@@ -65,7 +78,10 @@ class profileTab extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.arabic,
+                      languageProvider.appLanguage == 'en'
+                          ? AppLocalizations.of(context)!.english
+                          : AppLocalizations.of(context)!.arabic,
+                      //AppLocalizations.of(context)!.arabic,
                       style: AppStyle.bold20Primary,
                     ),
                     Image.asset(AssetManager.showmoreIcon)
@@ -83,26 +99,54 @@ class profileTab extends StatelessWidget {
             SizedBox(
               height: height * 0.02,
             ),
-            Container(
-              padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                  border: Border.all(
-                      color: Theme.of(context).primaryColor, width: 1),
-                  borderRadius: BorderRadius.circular(12)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.light,
-                    style: AppStyle.bold20Primary,
-                  ),
-                  Image.asset(AssetManager.showmoreIcon)
-                ],
+            InkWell(
+              onTap: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (builder) {
+                      return ThemeBootomSheet();
+                    });
+              },
+              child: Container(
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                    border: Border.all(
+                        color: Theme.of(context).primaryColor, width: 1),
+                    borderRadius: BorderRadius.circular(12)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      themeProvider.appTheme == ThemeMode.light
+                          ? AppLocalizations.of(context)!.light
+                          : AppLocalizations.of(context)!.dark,
+                      style: AppStyle.bold20Primary,
+                    ),
+                    Image.asset(AssetManager.showmoreIcon)
+                  ],
+                ),
               ),
             )
           ],
         ),
       ),
     );
+  }
+
+  Future<void> saveLastChange(
+      {required String language, required String theme}) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await prefs.setString('language', language);
+    await prefs.setString('theme', theme);
+  }
+
+  Future<Map<String, dynamic>> getLastChange() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    return {
+      "language": prefs.getString("language"),
+      "theme": prefs.getString("theme")
+    };
   }
 }

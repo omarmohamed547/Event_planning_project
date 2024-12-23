@@ -1,10 +1,16 @@
+import 'package:event_planning_ass/providers/app_language_provider.dart';
+import 'package:event_planning_ass/providers/app_theme_provider.dart';
 import 'package:event_planning_ass/ui/home_screen.dart';
 import 'package:event_planning_ass/utilis/theme_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (context) => AppLanguageProvider()),
+    ChangeNotifierProvider(create: (context) => AppThemeProvider())
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -13,14 +19,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    var languageProvider = Provider.of<AppLanguageProvider>(context);
+    var themeProvider = Provider.of<AppThemeProvider>(context);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeApp.lightTheme,
       darkTheme: ThemeApp.darkTheme,
-      themeMode: ThemeMode.light,
+      themeMode: themeProvider.appTheme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: Locale("en"),
+      locale: Locale(languageProvider.appLanguage),
       initialRoute: HomeScreen.homeScreenId,
       routes: {HomeScreen.homeScreenId: (context) => HomeScreen()},
     );
