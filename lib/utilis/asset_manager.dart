@@ -17,4 +17,5 @@ class AssetManager {
       "assets/images/SelectedProfileIcon.png";
   static const String selectedHeartIcon = "assets/images/SelectedHeartIcon.png";
   static const String showmoreIcon = "assets/images/showmoreIcon.png";
+  static const String birthdayImage = "assets/images/Birthdayimage.png";
 }

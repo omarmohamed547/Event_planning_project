@@ -17,6 +17,11 @@ class AppStyle {
       fontSize: 20,
       fontWeight: FontWeight.bold);
 
+  static final bold14Primary = GoogleFonts.inter(
+      color: AppColors.primaryColorLight,
+      fontSize: 14,
+      fontWeight: FontWeight.bold);
+
   static final bold20Black = GoogleFonts.inter(
       color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold);
 }

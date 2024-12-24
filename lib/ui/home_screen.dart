@@ -1,7 +1,7 @@
-import 'package:event_planning_ass/ui/tabs/home_tab.dart';
+import 'package:event_planning_ass/ui/tabs/home_tab/home_tab.dart';
 import 'package:event_planning_ass/ui/tabs/love_tab.dart';
 import 'package:event_planning_ass/ui/tabs/map_tab.dart';
-import 'package:event_planning_ass/ui/tabs/profile_tab.dart';
+import 'package:event_planning_ass/ui/tabs/profile_tab/profile_tab.dart';
 import 'package:event_planning_ass/utilis/app_colors.dart';
 import 'package:event_planning_ass/utilis/asset_manager.dart';
 import 'package:flutter/material.dart';

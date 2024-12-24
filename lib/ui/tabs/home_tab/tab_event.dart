@@ -13,7 +13,6 @@ class TabEvent extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
 
     return Container(
-      margin: EdgeInsets.only(bottom: height * 0.002),
       padding: EdgeInsets.symmetric(
           horizontal: width * 0.04, vertical: height * 0.004),
       decoration: BoxDecoration(
