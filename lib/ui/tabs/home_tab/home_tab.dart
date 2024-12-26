@@ -42,12 +42,12 @@ class _HomeTabState extends State<HomeTab> {
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(28),
                     bottomRight: Radius.circular(28))),
-            height: height * 0.20,
+            height: height * 0.21,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: height * 0.03,
+                  height: height * 0.05,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

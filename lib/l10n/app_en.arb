@@ -18,6 +18,13 @@
   "bookclub":"Book Club",
   "holiday":"Holiday",
   "eating":"Eating",
-  "exhibition":"Exhibition"
+  "exhibition":"Exhibition",
+  "email":"Email",
+  "password":"Password",
+  "repassword":"RePassword",
+  "search_event":"Search for Event",
+  "do_not_have_acc":"Do not have an account",
+  "forget_pass":"Forget Password"
+
 
 }

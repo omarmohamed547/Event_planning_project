@@ -18,6 +18,12 @@
   "bookclub":"نادي الكتب",
   "holiday":"اجازه",
   "eating":"اكل",
-  "exhibition":"معرض"
+  "exhibition":"معرض",
+  "email":"ايميل",
+  "password":"باسورد",
+  "repassword":"اعاده الباسورد",
+  "search_event":"بحث",
+  "do_not_have_acc":"لا تملك اكونت",
+  "forget_pass":"نسيت الباسورد"
 
 }
