@@ -1,6 +1,8 @@
 import 'package:event_planning_ass/providers/app_language_provider.dart';
 import 'package:event_planning_ass/providers/app_theme_provider.dart';
 import 'package:event_planning_ass/ui/home_screen.dart';
+import 'package:event_planning_ass/ui/login_screen.dart';
+import 'package:event_planning_ass/ui/register_scree.dart';
 import 'package:event_planning_ass/utilis/theme_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -30,8 +32,12 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: Locale(languageProvider.appLanguage),
-      initialRoute: HomeScreen.homeScreenId,
-      routes: {HomeScreen.homeScreenId: (context) => HomeScreen()},
+      initialRoute: LoginScreen.loginScreenId,
+      routes: {
+        HomeScreen.homeScreenId: (context) => HomeScreen(),
+        LoginScreen.loginScreenId: (context) => LoginScreen(),
+        RegisterScreen.registerScreenId: (context) => RegisterScreen()
+      },
     );
   }
 }

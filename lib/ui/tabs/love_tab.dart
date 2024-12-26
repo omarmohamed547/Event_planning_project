@@ -1,6 +1,7 @@
 import 'package:event_planning_ass/ui/tabs/home_tab/EventItem.dart';
 import 'package:event_planning_ass/utilis/app_colors.dart';
 import 'package:event_planning_ass/utilis/app_style.dart';
+import 'package:event_planning_ass/utilis/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 class LoveTab extends StatelessWidget {
@@ -38,52 +39,6 @@ class LoveTab extends StatelessWidget {
             ),
           )
         ],
-      ),
-    );
-  }
-}
-
-class CustomTextField extends StatelessWidget {
-  String hintText;
-  Color? borderColor;
-  TextStyle? hintStyle;
-  Widget? prefixIcon;
-  String? label;
-  CustomTextField({
-    this.label,
-    this.prefixIcon,
-    this.hintStyle,
-    required this.hintText,
-    this.borderColor,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
-
-    return Container(
-      margin: EdgeInsets.only(
-        right: width * 0.02,
-        left: width * 0.02,
-        //top: height * 0.05,
-      ),
-      padding: EdgeInsets.symmetric(
-          horizontal: width * 0.02, vertical: height * 0.01),
-      child: TextFormField(
-        decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide:
-                    BorderSide(width: 1, color: borderColor ?? Colors.grey)),
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide:
-                    BorderSide(width: 1, color: borderColor ?? Colors.grey)),
-            prefixIcon: prefixIcon,
-            hintText: hintText,
-            hintStyle: hintStyle ?? AppStyle.Medium16grey),
       ),
     );
   }

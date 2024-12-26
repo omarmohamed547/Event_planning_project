@@ -20,11 +20,16 @@
   "eating":"Eating",
   "exhibition":"Exhibition",
   "email":"Email",
+  "name":"Name",
+  "alredy_acc":"Already Have Account ? ",
   "password":"Password",
+  "login":"Login",
+  "create_acc":"Create Account",
+  "log_with_google":"Login With Google",
   "repassword":"RePassword",
   "search_event":"Search for Event",
-  "do_not_have_acc":"Do not have an account",
-  "forget_pass":"Forget Password"
+  "do_not_have_acc":"Don’t Have Account ? ",
+  "forget_pass":"Forget Password?"
 
 
 }

@@ -24,6 +24,13 @@
   "repassword":"اعاده الباسورد",
   "search_event":"بحث",
   "do_not_have_acc":"لا تملك اكونت",
-  "forget_pass":"نسيت الباسورد"
+  "forget_pass":"نسيت الباسورد؟",
+  "login":"Login",
+  "create_acc":"Create Account",
+  "log_with_google":"Login With Google",
+    "name":"Name",
+      "alredy_acc":"Already Have Account ? "
+
+
 
 }

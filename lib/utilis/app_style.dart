@@ -9,6 +9,11 @@ class AppStyle {
   static final bold24White = GoogleFonts.inter(
       color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold);
 
+  static final Medium20Primary = GoogleFonts.inter(
+      color: AppColors.primaryColorLight,
+      fontSize: 20,
+      fontWeight: FontWeight.w500);
+
   static final Medium16White = GoogleFonts.inter(
       color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500);
 

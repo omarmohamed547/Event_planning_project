@@ -69,6 +69,8 @@ flutter:
      - assets/images/
      - assets/images/showmoreIcon.png
      - assets/icons/
+    # - assets/icons/obscureIcon.png
+
      
 
   # An image asset can refer to one or more resolution-specific "variants", see
