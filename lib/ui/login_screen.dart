@@ -27,6 +27,7 @@ class LoginScreen extends StatelessWidget {
           children: [
             Image.asset(height: height * 0.3, AssetManager.logoLoginImage),
             CustomTextField(
+              margin: EdgeInsets.symmetric(horizontal: width * 0.04),
               hintText: AppLocalizations.of(context)!.email,
               prefixIcon: Image.asset("assets/images/EmailIcon.png"),
             ),
@@ -34,6 +35,7 @@ class LoginScreen extends StatelessWidget {
               height: height * 0.02,
             ),
             CustomTextField(
+              margin: EdgeInsets.symmetric(horizontal: width * 0.04),
               hintText: AppLocalizations.of(context)!.password,
               suffixxIcon: Image.asset("assets/icons/obscureIcon.png"),
               prefixIcon: Image.asset("assets/icons/passIcon.png"),

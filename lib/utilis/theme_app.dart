@@ -9,8 +9,7 @@ class ThemeApp {
           backgroundColor: AppColors.primaryColorLight,
           shape:
               StadiumBorder(side: BorderSide(width: 4, color: Colors.white))),
-      appBarTheme: AppBarTheme(
-          backgroundColor: AppColors.primaryColorLight, toolbarHeight: 120),
+      // appBarTheme: AppBarTheme(backgroundColor: AppColors.primaryColorLight, toolbarHeight: 120),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           elevation: 0,
           showUnselectedLabels: true,

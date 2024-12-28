@@ -19,6 +19,7 @@ class LoveTab extends StatelessWidget {
             height: height * 0.05,
           ),
           CustomTextField(
+              margin: EdgeInsets.symmetric(horizontal: width * 0.03),
               hintText: "Search for Event",
               borderColor: AppColors.primaryColorLight,
               hintStyle: AppStyle.bold14Primary,

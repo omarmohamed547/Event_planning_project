@@ -8,8 +8,13 @@ class custom_elevated_button extends StatelessWidget {
   TextStyle? style;
   Widget? icon;
   Function onButtonClicked;
+  EdgeInsets? paddingHeight;
+  EdgeInsets? paddingContainer;
+
   custom_elevated_button({
     required this.onButtonClicked,
+    this.paddingHeight,
+    this.paddingContainer,
     this.icon,
     required this.text,
     this.style,
@@ -23,8 +28,9 @@ class custom_elevated_button extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
 
     return Container(
-      padding: EdgeInsets.symmetric(
-          horizontal: width * 0.05, vertical: height * 0.01),
+      padding: paddingContainer ??
+          EdgeInsets.symmetric(
+              horizontal: width * 0.05, vertical: height * 0.01),
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
@@ -37,7 +43,8 @@ class custom_elevated_button extends StatelessWidget {
             onButtonClicked();
           },
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: height * 0.02),
+            padding:
+                paddingHeight ?? EdgeInsets.symmetric(vertical: height * 0.02),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

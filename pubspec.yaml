@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  flutter_native_splash: ^2.4.3
   flutter:
     sdk: flutter
   path_provider: ^2.0.10  # Use the latest version
@@ -41,6 +42,7 @@ dependencies:
   google_fonts: ^6.2.1
   provider: ^6.1.2
   shared_preferences: ^2.3.4
+  date_format: ^2.0.9
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +71,8 @@ flutter:
      - assets/images/
      - assets/images/showmoreIcon.png
      - assets/icons/
+     - assets/images/LogoSplashIcon.png
+     - assets/images/brandingSplashIcon.png
     # - assets/icons/obscureIcon.png
 
      

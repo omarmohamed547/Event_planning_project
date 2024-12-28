@@ -29,7 +29,23 @@
   "repassword":"RePassword",
   "search_event":"Search for Event",
   "do_not_have_acc":"Don’t Have Account ? ",
-  "forget_pass":"Forget Password?"
+  "forget_pass":"Forget Password?",
+    "create_event":"Create Event",
+    "title":"Title",
+        "desc":"Describtion",
+                "loc":"Location",
+                "add_event":"Add Event",
+                                "choose_event":"Choose Event Location",
+
+
+        "event_title":"Event Title",
+        "event_desc":"Event Describtion",
+        "event_date":"Event Date",
+        "event_time":"Event Time",
+        "choose_date":"Choose Date",
+        "choose_time":"Choose Time"
+
+
 
 
 }

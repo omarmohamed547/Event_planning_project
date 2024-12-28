@@ -1,5 +1,6 @@
 import 'package:event_planning_ass/providers/app_language_provider.dart';
 import 'package:event_planning_ass/providers/app_theme_provider.dart';
+import 'package:event_planning_ass/ui/create_event.dart';
 import 'package:event_planning_ass/ui/home_screen.dart';
 import 'package:event_planning_ass/ui/login_screen.dart';
 import 'package:event_planning_ass/ui/register_scree.dart';
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
       routes: {
         HomeScreen.homeScreenId: (context) => HomeScreen(),
         LoginScreen.loginScreenId: (context) => LoginScreen(),
-        RegisterScreen.registerScreenId: (context) => RegisterScreen()
+        RegisterScreen.registerScreenId: (context) => RegisterScreen(),
+        CreateEvent.createEventScreenId: (context) => CreateEvent(),
       },
     );
   }

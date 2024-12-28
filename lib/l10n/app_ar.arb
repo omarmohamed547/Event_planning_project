@@ -29,7 +29,20 @@
   "create_acc":"Create Account",
   "log_with_google":"Login With Google",
     "name":"Name",
-      "alredy_acc":"Already Have Account ? "
+        "title":"Title",
+                "desc":"Describtion",
+                "loc":"Location",
+                "add_event":"Add Event",
+                                "choose_event":"Choose Event Location",
+
+      "alredy_acc":"Already Have Account ? ",
+    "create_event":"Create Event",
+     "event_title":"Event Title",
+        "event_desc":"Event Describtion",
+        "event_date":"Event Date",
+        "event_time":"Event Time",
+        "choose_date":"Choose Date",
+        "choose_time":"Choose Time"
 
 
 

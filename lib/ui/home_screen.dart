@@ -1,3 +1,4 @@
+import 'package:event_planning_ass/ui/create_event.dart';
 import 'package:event_planning_ass/ui/tabs/home_tab/home_tab.dart';
 import 'package:event_planning_ass/ui/tabs/love_tab.dart';
 import 'package:event_planning_ass/ui/tabs/map_tab.dart';
@@ -22,7 +23,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, CreateEvent.createEventScreenId);
+        },
         child: Image.asset(AssetManager.iconAdded),
       ),
       bottomNavigationBar: Theme(
@@ -31,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
           color: Theme.of(context).primaryColor,
           padding: EdgeInsets.zero,
           shape: CircularNotchedRectangle(),
-          notchMargin: 8,
+          notchMargin: 4,
           child: BottomNavigationBar(
               currentIndex: selectedIndex,
               onTap: (index) {

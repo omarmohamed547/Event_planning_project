@@ -1,0 +1,24 @@
+flutter_native_splash:
+  # Background color of the splash screen
+  color: "#FFFFFF"
+
+  # Image for the splash screen
+  image: assets/images/LogoSplashIcon.png
+
+  # Branding image (optional)
+  branding: assets/images/brandingSplashIcon.png
+
+  # Enable splash screen generation for Android
+  android: true
+
+  # Position of the splash image on Android
+  android_gravity: center
+
+  # Android 12-specific configuration
+  android_12:
+    image: assets/images/LogoSplashIcon.png
+    color: "#FFFFFF"
+    branding: assets/images/brandingSplashIcon.png
+
+  # Enable splash screen generation for iOS
+  ios: true

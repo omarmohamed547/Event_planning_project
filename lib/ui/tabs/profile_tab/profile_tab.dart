@@ -2,6 +2,7 @@ import 'package:event_planning_ass/providers/app_language_provider.dart';
 import 'package:event_planning_ass/providers/app_theme_provider.dart';
 import 'package:event_planning_ass/ui/tabs/profile_tab/Language_bootom_sheet.dart';
 import 'package:event_planning_ass/ui/tabs/profile_tab/Theme_bottom_sheet.dart';
+import 'package:event_planning_ass/utilis/app_colors.dart';
 import 'package:event_planning_ass/utilis/app_style.dart';
 import 'package:event_planning_ass/utilis/asset_manager.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,8 @@ class _profileTabState extends State<profileTab> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: height * 0.17,
+        backgroundColor: AppColors.primaryColorLight,
+        toolbarHeight: height * 0.2,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(38))),
         title: Row(
