@@ -43,6 +43,8 @@ dependencies:
   provider: ^6.1.2
   shared_preferences: ^2.3.4
   date_format: ^2.0.9
+  firebase_core: ^3.9.0
+  cloud_firestore: ^5.6.0
 
 dev_dependencies:
   flutter_test:

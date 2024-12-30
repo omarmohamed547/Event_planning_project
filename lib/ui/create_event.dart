@@ -1,3 +1,5 @@
+import 'package:event_planning_ass/firebase_utilis.dart';
+import 'package:event_planning_ass/model/Event_model.dart';
 import 'package:event_planning_ass/ui/choose_date_or_time.dart';
 import 'package:event_planning_ass/ui/tabs/home_tab/tab_event.dart';
 import 'package:event_planning_ass/utilis/app_colors.dart';
@@ -5,6 +7,7 @@ import 'package:event_planning_ass/utilis/app_style.dart';
 import 'package:event_planning_ass/utilis/asset_manager.dart';
 import 'package:event_planning_ass/utilis/custom_elevated_button.dart';
 import 'package:event_planning_ass/utilis/custom_text_field.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -27,6 +30,9 @@ class _CreateEventState extends State<CreateEvent> {
   String? selectedTime;
   var titleController = TextEditingController();
   var descController = TextEditingController();
+  String imageSelected = '';
+  String eventSelected = '';
+
   TextStyle? styleForHandleDate =
       AppStyle.Medium16Black.copyWith(color: AppColors.primaryColorLight);
 
@@ -57,6 +63,8 @@ class _CreateEventState extends State<CreateEvent> {
       AppLocalizations.of(context)!.workshop,
       AppLocalizations.of(context)!.gaming,
     ];
+    imageSelected = mapListImage[eventNameList[selectIndex]]!;
+    eventSelected = eventNameList[selectIndex];
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -76,6 +84,8 @@ class _CreateEventState extends State<CreateEvent> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
+                height: height * 0.25,
+                width: double.infinity,
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
@@ -262,6 +272,22 @@ class _CreateEventState extends State<CreateEvent> {
       if (selectedTime == null) {
         selectedTime = "Please choose time";
         styleForHandleTime = AppStyle.Medium16Red;
+      } else {
+        EventModel eventModel = EventModel(
+            desc: descController.text,
+            eventName: eventSelected,
+            title: titleController.text,
+            time: selectedTime!,
+            dateTime: selectedDateFocused!,
+            image: imageSelected);
+        FirebaseUtilis.addEvent(eventModel).timeout(
+          Duration(milliseconds: 500),
+          onTimeout: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Center(child: Text('Processing Data'))),
+            );
+          },
+        );
       }
       setState(() {});
 
