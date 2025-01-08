@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_planning_ass/providers/app_language_provider.dart';
 import 'package:event_planning_ass/providers/app_theme_provider.dart';
+import 'package:event_planning_ass/providers/event_list_provider.dart';
+import 'package:event_planning_ass/ui/OnBoarding_Screen.dart';
 import 'package:event_planning_ass/ui/create_event.dart';
 import 'package:event_planning_ass/ui/home_screen.dart';
 import 'package:event_planning_ass/ui/login_screen.dart';
+import 'package:event_planning_ass/ui/startScreen.dart';
 import 'package:event_planning_ass/ui/register_scree.dart';
 import 'package:event_planning_ass/utilis/theme_app.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +23,8 @@ void main() async {
   await FirebaseFirestore.instance.disableNetwork();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => AppLanguageProvider()),
-    ChangeNotifierProvider(create: (context) => AppThemeProvider())
+    ChangeNotifierProvider(create: (context) => AppThemeProvider()),
+    ChangeNotifierProvider(create: (context) => EventListProvider())
   ], child: const MyApp()));
 }
 
@@ -41,8 +45,10 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: Locale(languageProvider.appLanguage),
-      initialRoute: LoginScreen.loginScreenId,
+      initialRoute: StartScreen.startScreenId,
       routes: {
+        OnboardingScreen.onBoardingId: (context) => OnboardingScreen(),
+        StartScreen.startScreenId: (context) => StartScreen(),
         HomeScreen.homeScreenId: (context) => HomeScreen(),
         LoginScreen.loginScreenId: (context) => LoginScreen(),
         RegisterScreen.registerScreenId: (context) => RegisterScreen(),

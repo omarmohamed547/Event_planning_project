@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_planning_ass/firebase_utilis.dart';
 import 'package:event_planning_ass/model/Event_model.dart';
+import 'package:event_planning_ass/providers/event_list_provider.dart';
 import 'package:event_planning_ass/ui/choose_date_or_time.dart';
 import 'package:event_planning_ass/ui/tabs/home_tab/tab_event.dart';
 import 'package:event_planning_ass/utilis/app_colors.dart';
@@ -12,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class CreateEvent extends StatefulWidget {
   static const String createEventScreenId = "CreateEvent";
@@ -40,9 +43,11 @@ class _CreateEventState extends State<CreateEvent> {
       AppStyle.Medium16Black.copyWith(color: AppColors.primaryColorLight);
 
   final _formKey = GlobalKey<FormState>();
-
+  late EventListProvider eventprovider;
   @override
   Widget build(BuildContext context) {
+    eventprovider = Provider.of<EventListProvider>(context);
+
     Map<String, String> mapListImage = {
       AppLocalizations.of(context)!.sport: AssetManager.sportImage,
       AppLocalizations.of(context)!.birthday: AssetManager.birthdayImage,
@@ -283,9 +288,8 @@ class _CreateEventState extends State<CreateEvent> {
         FirebaseUtilis.addEvent(eventModel).timeout(
           Duration(milliseconds: 500),
           onTimeout: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Center(child: Text('Processing Data'))),
-            );
+            eventprovider.getAllEvent();
+            Navigator.pop(context);
           },
         );
       }

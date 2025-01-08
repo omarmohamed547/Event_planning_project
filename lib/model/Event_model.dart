@@ -33,7 +33,7 @@ class EventModel {
       "title": title,
       "time": time,
       "dateTime": dateTime.millisecondsSinceEpoch,
-      "isFavourite": isFavourite,
+      'isFavourite': isFavourite,
       "eventName": eventName,
     };
   }
@@ -47,7 +47,7 @@ class EventModel {
           title: data["title"],
           dateTime: DateTime.fromMillisecondsSinceEpoch(data["dateTime"]),
           eventName: data["eventName"],
-          isFavourite: data["isFavourite"],
+          isFavourite: data['isFavourite'] as bool,
           image: data["image"],
         );
 }

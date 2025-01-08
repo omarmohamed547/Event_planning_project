@@ -11,8 +11,12 @@ class CustomTextField extends StatelessWidget {
   String? label;
   int? maxlines;
   TextEditingController? controller;
+  TextInputType? keyboardType;
   String? Function(String?)? validator;
+  bool? obscureText;
   CustomTextField({
+    this.obscureText, // Corrected property name
+    this.keyboardType = TextInputType.text,
     this.controller,
     this.validator,
     this.maxlines,
@@ -40,9 +44,11 @@ class CustomTextField extends StatelessWidget {
       )*/
       // padding: EdgeInsets.symmetric(  horizontal: width * 0.03, vertical: height * 0.001),
       child: TextFormField(
+        obscureText: obscureText ?? false, // Corrected here
         controller: controller,
         validator: validator,
-        maxLines: maxlines,
+        maxLines: (obscureText ?? false) ? 1 : maxlines,
+
         decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),

@@ -1,3 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:event_planning_ass/firebase_utilis.dart';
+import 'package:event_planning_ass/model/Event_model.dart';
+import 'package:event_planning_ass/providers/event_list_provider.dart';
 import 'package:event_planning_ass/ui/tabs/home_tab/EventItem.dart';
 import 'package:event_planning_ass/ui/tabs/home_tab/tab_event.dart';
 import 'package:event_planning_ass/utilis/app_colors.dart';
@@ -5,10 +9,9 @@ import 'package:event_planning_ass/utilis/app_style.dart';
 import 'package:event_planning_ass/utilis/asset_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class HomeTab extends StatefulWidget {
-  int isSelected = 0;
-
   HomeTab({super.key});
 
   @override
@@ -18,17 +21,12 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
-    List<String> eventNameList = [
-      AppLocalizations.of(context)!.all,
-      AppLocalizations.of(context)!.sport,
-      AppLocalizations.of(context)!.birthday,
-      AppLocalizations.of(context)!.metting,
-      AppLocalizations.of(context)!.bookclub,
-      AppLocalizations.of(context)!.eating,
-      AppLocalizations.of(context)!.exhibition,
-      AppLocalizations.of(context)!.workshop,
-      AppLocalizations.of(context)!.gaming,
-    ];
+    EventListProvider eventprovider = Provider.of<EventListProvider>(context);
+    eventprovider.returneventNameList(context);
+    if (eventprovider.eventsList.isEmpty) {
+      eventprovider.getAllEvent();
+    }
+
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
@@ -106,11 +104,10 @@ class _HomeTabState extends State<HomeTab> {
                   ],
                 ),
                 DefaultTabController(
-                    length: eventNameList.length,
+                    length: eventprovider.eventNameList.length,
                     child: TabBar(
                         onTap: (index) {
-                          widget.isSelected = index;
-                          setState(() {});
+                          eventprovider.changeIndex(index);
                         },
                         isScrollable: true,
                         dividerColor: Colors.transparent,
@@ -118,11 +115,12 @@ class _HomeTabState extends State<HomeTab> {
                         indicatorColor: Colors.transparent,
                         labelPadding: EdgeInsets.symmetric(
                             horizontal: width * 0.02, vertical: height * 0.01),
-                        tabs: eventNameList.map((eventName) {
+                        tabs: eventprovider.eventNameList.map((eventName) {
                           return TabEvent(
                               eventName: eventName,
-                              isSelected: widget.isSelected ==
-                                  eventNameList.indexOf(eventName));
+                              isSelected: eventprovider.selectedIndex ==
+                                  eventprovider.eventNameList
+                                      .indexOf(eventName));
                         }).toList())),
               ],
             ),
@@ -130,16 +128,22 @@ class _HomeTabState extends State<HomeTab> {
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: width * 0.04),
-              child: ListView.separated(
-                  separatorBuilder: (context, index) {
-                    return SizedBox(
-                      height: height * 0.02,
-                    );
-                  },
-                  itemCount: 7,
-                  itemBuilder: (context, index) {
-                    return EventItem(height: height, width: width);
-                  }),
+              child: eventprovider.filterList.isEmpty
+                  ? Center(child: Text("No Items Found"))
+                  : ListView.separated(
+                      separatorBuilder: (context, index) {
+                        return SizedBox(
+                          height: height * 0.02,
+                        );
+                      },
+                      itemCount: eventprovider.filterList.length,
+                      itemBuilder: (context, index) {
+                        return EventItem(
+                          height: height,
+                          width: width,
+                          eventModelobj: eventprovider.filterList[index],
+                        );
+                      }),
             ),
           )
         ],

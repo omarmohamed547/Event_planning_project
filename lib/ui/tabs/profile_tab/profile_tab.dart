@@ -25,7 +25,7 @@ class _profileTabState extends State<profileTab> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColorLight,
+        backgroundColor: Theme.of(context).primaryColor,
         toolbarHeight: height * 0.2,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(38))),

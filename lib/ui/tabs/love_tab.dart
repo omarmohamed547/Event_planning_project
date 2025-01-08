@@ -35,7 +35,8 @@ class LoveTab extends StatelessWidget {
                   },
                   itemCount: 7,
                   itemBuilder: (context, index) {
-                    return EventItem(height: height, width: width);
+                    return Container();
+                    //EventItem(height: height, width: width);
                   }),
             ),
           )

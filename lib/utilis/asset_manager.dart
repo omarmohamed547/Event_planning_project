@@ -24,4 +24,8 @@ class AssetManager {
   static const String mettingImage = "assets/images/mettingImage.png";
   static const String holidayImage = "assets/images/holidayImage.png";
   static const String exhibitionImage = "assets/images/exhibition.png";
+  static const String firstintroScreen = "assets/images/firstintroScreen.png";
+  static const String smartPeopleImage = "assets/images/smart-people.png";
+  static const String socialMediaImage = "assets/images/social-media.png";
+  static const String managerDesk = "assets/images/manager-desk.png";
 }
