@@ -144,6 +144,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         email: emailController.text,
                         password: passwordController.text,
                       );
+
+                      await credential.user
+                          ?.updateProfile(displayName: nameController.text);
+
                       DailogUtilis.hideLoading(context: context);
                       DailogUtilis.showMessage(
                           context: context,

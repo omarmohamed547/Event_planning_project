@@ -10,6 +10,8 @@ class EventListProvider extends ChangeNotifier {
   //data
   List<EventModel> eventsList = [];
   List<EventModel> filterList = [];
+  List<EventModel> favouriteList = [];
+
   List<String> eventNameList = [];
   int selectedIndex = 0;
 
@@ -38,6 +40,20 @@ class EventListProvider extends ChangeNotifier {
     filterList.sort((event1, event2) {
       return event1.dateTime.compareTo(event2.dateTime);
     });
+
+    notifyListeners();
+  }
+
+  void getFavouriteEvent() async {
+    QuerySnapshot<EventModel> querysnapshot =
+        await FirebaseUtilis.getEventCollection()
+            .orderBy('dateTime')
+            .where("isFavourite", isEqualTo: true)
+            .get();
+    favouriteList = querysnapshot.docs.map((doc) {
+      return doc.data();
+    }).toList();
+
     notifyListeners();
   }
 
@@ -74,6 +90,7 @@ class EventListProvider extends ChangeNotifier {
   void updateFavouriteFunc(EventModel event) {
     // Update the local isFavourite value
     //event.isFavourite = !event.isFavourite;
+    print("${event.isFavourite}");
 
     FirebaseUtilis.getEventCollection()
         .doc(event.id)
@@ -84,6 +101,7 @@ class EventListProvider extends ChangeNotifier {
         print("${event.isFavourite}");
 
         selectedIndex == 0 ? getAllEvent() : getFilterEvent();
+        getFavouriteEvent();
       },
     );
 

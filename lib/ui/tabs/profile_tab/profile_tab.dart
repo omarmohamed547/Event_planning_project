@@ -1,10 +1,12 @@
 import 'package:event_planning_ass/providers/app_language_provider.dart';
 import 'package:event_planning_ass/providers/app_theme_provider.dart';
+import 'package:event_planning_ass/ui/login_screen.dart';
 import 'package:event_planning_ass/ui/tabs/profile_tab/Language_bootom_sheet.dart';
 import 'package:event_planning_ass/ui/tabs/profile_tab/Theme_bottom_sheet.dart';
 import 'package:event_planning_ass/utilis/app_colors.dart';
 import 'package:event_planning_ass/utilis/app_style.dart';
 import 'package:event_planning_ass/utilis/asset_manager.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -17,9 +19,13 @@ class profileTab extends StatefulWidget {
 }
 
 class _profileTabState extends State<profileTab> {
+  final User? user = FirebaseAuth.instance.currentUser;
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
     var languageProvider = Provider.of<AppLanguageProvider>(context);
     var themeProvider = Provider.of<AppThemeProvider>(context);
 
@@ -37,11 +43,11 @@ class _profileTabState extends State<profileTab> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "john sawfwt",
+                  '${user?.displayName ?? 'Not Available'}',
                   style: AppStyle.bold24White,
                 ),
                 Text(
-                  "john sawfwt.route@gmail.com",
+                  '${user?.email ?? 'Not Available'}',
                   style: AppStyle.Medium16White,
                 )
               ],
@@ -53,81 +59,113 @@ class _profileTabState extends State<profileTab> {
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              AppLocalizations.of(context)!.language,
-              style: AppStyle.bold20Black,
-            ),
-            SizedBox(
-              height: height * 0.02,
-            ),
-            InkWell(
-              onTap: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (builder) {
-                      return LanguageBootomSheet();
-                    });
-              },
-              child: Container(
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Theme.of(context).primaryColor, width: 1),
-                    borderRadius: BorderRadius.circular(12)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      languageProvider.appLanguage == 'en'
-                          ? AppLocalizations.of(context)!.english
-                          : AppLocalizations.of(context)!.arabic,
-                      //AppLocalizations.of(context)!.arabic,
-                      style: AppStyle.bold20Primary,
-                    ),
-                    Image.asset(AssetManager.showmoreIcon)
-                  ],
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  AppLocalizations.of(context)!.language,
+                  style: AppStyle.bold20Black,
                 ),
-              ),
-            ),
-            SizedBox(
-              height: height * 0.04,
-            ),
-            Text(
-              AppLocalizations.of(context)!.theme,
-              style: AppStyle.bold20Black,
-            ),
-            SizedBox(
-              height: height * 0.02,
-            ),
-            InkWell(
-              onTap: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (builder) {
-                      return ThemeBootomSheet();
-                    });
-              },
-              child: Container(
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Theme.of(context).primaryColor, width: 1),
-                    borderRadius: BorderRadius.circular(12)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      themeProvider.appTheme == ThemeMode.light
-                          ? AppLocalizations.of(context)!.light
-                          : AppLocalizations.of(context)!.dark,
-                      style: AppStyle.bold20Primary,
-                    ),
-                    Image.asset(AssetManager.showmoreIcon)
-                  ],
+                SizedBox(
+                  height: height * 0.02,
                 ),
-              ),
-            )
+                InkWell(
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (builder) {
+                          return LanguageBootomSheet();
+                        });
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Theme.of(context).primaryColor, width: 1),
+                        borderRadius: BorderRadius.circular(12)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          languageProvider.appLanguage == 'en'
+                              ? AppLocalizations.of(context)!.english
+                              : AppLocalizations.of(context)!.arabic,
+                          //AppLocalizations.of(context)!.arabic,
+                          style: AppStyle.bold20Primary,
+                        ),
+                        Image.asset(AssetManager.showmoreIcon)
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: height * 0.04,
+                ),
+                Text(
+                  AppLocalizations.of(context)!.theme,
+                  style: AppStyle.bold20Black,
+                ),
+                SizedBox(
+                  height: height * 0.02,
+                ),
+                InkWell(
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (builder) {
+                          return ThemeBootomSheet();
+                        });
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Theme.of(context).primaryColor, width: 1),
+                        borderRadius: BorderRadius.circular(12)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          themeProvider.appTheme == ThemeMode.light
+                              ? AppLocalizations.of(context)!.light
+                              : AppLocalizations.of(context)!.dark,
+                          style: AppStyle.bold20Primary,
+                        ),
+                        Image.asset(AssetManager.showmoreIcon)
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16)),
+                    backgroundColor: Color(0xffFF5659)),
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushReplacementNamed(LoginScreen
+                      .loginScreenId); // Navigate to the login screen
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: height * 0.02),
+                  child: Row(
+                    children: [
+                      Image.asset("assets/icons/logoutIcon.png"),
+                      SizedBox(
+                        width: width * 0.02,
+                      ),
+                      Text(
+                        "Logout",
+                        style: AppStyle.Medium20Primary.copyWith(
+                            color: Colors.white),
+                      ),
+                    ],
+                  ),
+                )),
           ],
         ),
       ),

@@ -12,12 +12,11 @@ class FirebaseUtilis {
   }
 
   static Future<void> addEvent(EventModel event) {
-    /*  CollectionReference<EventModel> collectionReference =
+    CollectionReference<EventModel> collectionReference =
         getEventCollection(); //collection
     DocumentReference<EventModel> docRef = collectionReference.doc(); //document
-    event.id = docRef.id; //autoId
-     docRef.set(event);
-    */
-    return getEventCollection().doc().set(event);
+    event.id = docRef.id; // auto-generate ID
+
+    return docRef.set(event); // Save event to Firestore
   }
 }

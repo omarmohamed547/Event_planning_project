@@ -2,6 +2,7 @@ import 'package:event_planning_ass/utilis/app_style.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
+  void Function(String)? onChanged;
   String hintText;
   Color? borderColor;
   TextStyle? hintStyle;
@@ -15,6 +16,7 @@ class CustomTextField extends StatelessWidget {
   String? Function(String?)? validator;
   bool? obscureText;
   CustomTextField({
+    this.onChanged,
     this.obscureText, // Corrected property name
     this.keyboardType = TextInputType.text,
     this.controller,
@@ -44,6 +46,7 @@ class CustomTextField extends StatelessWidget {
       )*/
       // padding: EdgeInsets.symmetric(  horizontal: width * 0.03, vertical: height * 0.001),
       child: TextFormField(
+        onChanged: onChanged,
         obscureText: obscureText ?? false, // Corrected here
         controller: controller,
         validator: validator,
