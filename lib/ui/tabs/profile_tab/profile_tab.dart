@@ -1,5 +1,7 @@
 import 'package:event_planning_ass/providers/app_language_provider.dart';
 import 'package:event_planning_ass/providers/app_theme_provider.dart';
+import 'package:event_planning_ass/providers/event_list_provider.dart';
+import 'package:event_planning_ass/providers/user_provider.dart';
 import 'package:event_planning_ass/ui/login_screen.dart';
 import 'package:event_planning_ass/ui/tabs/profile_tab/Language_bootom_sheet.dart';
 import 'package:event_planning_ass/ui/tabs/profile_tab/Theme_bottom_sheet.dart';
@@ -19,10 +21,11 @@ class profileTab extends StatefulWidget {
 }
 
 class _profileTabState extends State<profileTab> {
-  final User? user = FirebaseAuth.instance.currentUser;
-
   @override
   Widget build(BuildContext context) {
+    var userprovider = Provider.of<UserProvider>(context);
+    var eventprovider = Provider.of<EventListProvider>(context);
+
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
@@ -43,11 +46,11 @@ class _profileTabState extends State<profileTab> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${user?.displayName ?? 'Not Available'}',
+                  '${userprovider.currentuser!.name! ?? 'Not Available'}',
                   style: AppStyle.bold24White,
                 ),
                 Text(
-                  '${user?.email ?? 'Not Available'}',
+                  '${userprovider.currentuser!.email! ?? 'Not Available'}',
                   style: AppStyle.Medium16White,
                 )
               ],
@@ -146,7 +149,8 @@ class _profileTabState extends State<profileTab> {
                         borderRadius: BorderRadius.circular(16)),
                     backgroundColor: Color(0xffFF5659)),
                 onPressed: () {
-                  FirebaseAuth.instance.signOut();
+                  eventprovider.filterList = [];
+                  // FirebaseAuth.instance.signOut();
                   Navigator.of(context).pushReplacementNamed(LoginScreen
                       .loginScreenId); // Navigate to the login screen
                 },

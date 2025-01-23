@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_planning_ass/firebase_utilis.dart';
 import 'package:event_planning_ass/model/Event_model.dart';
 import 'package:event_planning_ass/providers/event_list_provider.dart';
+import 'package:event_planning_ass/providers/user_provider.dart';
 import 'package:event_planning_ass/ui/tabs/home_tab/EventItem.dart';
 import 'package:event_planning_ass/ui/tabs/home_tab/tab_event.dart';
 import 'package:event_planning_ass/utilis/app_colors.dart';
@@ -21,10 +22,12 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
+    UserProvider userprovider = Provider.of<UserProvider>(context);
+
     EventListProvider eventprovider = Provider.of<EventListProvider>(context);
     eventprovider.returneventNameList(context);
     if (eventprovider.eventsList.isEmpty) {
-      eventprovider.getAllEvent();
+      eventprovider.getAllEvent(userprovider.currentuser!.id!);
     }
 
     var height = MediaQuery.of(context).size.height;
@@ -58,7 +61,7 @@ class _HomeTabState extends State<HomeTab> {
                           style: AppStyle.Medium16White.copyWith(fontSize: 14),
                         ),
                         Text(
-                          AppLocalizations.of(context)!.john_safwat,
+                          userprovider.currentuser!.name!,
                           style: AppStyle.bold24White,
                         )
                       ],
@@ -107,7 +110,8 @@ class _HomeTabState extends State<HomeTab> {
                     length: eventprovider.eventNameList.length,
                     child: TabBar(
                         onTap: (index) {
-                          eventprovider.changeIndex(index);
+                          eventprovider.changeIndex(
+                              index, userprovider.currentuser!.id!);
                         },
                         isScrollable: true,
                         dividerColor: Colors.transparent,

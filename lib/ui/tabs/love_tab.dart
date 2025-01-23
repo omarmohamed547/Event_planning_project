@@ -1,4 +1,5 @@
 import 'package:event_planning_ass/providers/event_list_provider.dart';
+import 'package:event_planning_ass/providers/user_provider.dart';
 import 'package:event_planning_ass/ui/tabs/home_tab/EventItem.dart';
 import 'package:event_planning_ass/utilis/app_colors.dart';
 import 'package:event_planning_ass/utilis/app_style.dart';
@@ -24,7 +25,9 @@ class _LoveTabState extends State<LoveTab> {
     // Ensure favourite events are loaded when the screen is first opened
     final eventProvider =
         Provider.of<EventListProvider>(context, listen: false);
-    eventProvider.getFavouriteEvent();
+
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    eventProvider.getFavouriteEvent(userProvider.currentuser!.id!);
   }
 
   @override
@@ -38,6 +41,7 @@ class _LoveTabState extends State<LoveTab> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     EventListProvider eventprovider = Provider.of<EventListProvider>(context);
+    var userprovider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: Column(
         children: [
@@ -50,7 +54,8 @@ class _LoveTabState extends State<LoveTab> {
                 setState(() {
                   if (text.isEmpty) {
                     eventprovider.favouriteList = eventprovider.favouriteList;
-                    eventprovider.getFavouriteEvent();
+                    eventprovider
+                        .getFavouriteEvent(userprovider.currentuser!.id!);
                   } else {
                     eventprovider.favouriteList =
                         eventprovider.favouriteList.where((event) {

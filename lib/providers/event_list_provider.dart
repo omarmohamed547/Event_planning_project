@@ -30,9 +30,9 @@ class EventListProvider extends ChangeNotifier {
   }
 
 //function
-  void getAllEvent() async {
+  void getAllEvent(String uId) async {
     QuerySnapshot<EventModel> querysnapshot =
-        await FirebaseUtilis.getEventCollection().get();
+        await FirebaseUtilis.getEventCollection(uId).get();
     eventsList = querysnapshot.docs.map((doc) {
       return doc.data();
     }).toList();
@@ -44,9 +44,9 @@ class EventListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getFavouriteEvent() async {
+  void getFavouriteEvent(String uId) async {
     QuerySnapshot<EventModel> querysnapshot =
-        await FirebaseUtilis.getEventCollection()
+        await FirebaseUtilis.getEventCollection(uId)
             .orderBy('dateTime')
             .where("isFavourite", isEqualTo: true)
             .get();
@@ -57,9 +57,9 @@ class EventListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getFilterEvent() async {
+  void getFilterEvent(String uId) async {
     QuerySnapshot<EventModel> querysnapshot =
-        await FirebaseUtilis.getEventCollection().get();
+        await FirebaseUtilis.getEventCollection(uId).get();
     eventsList = querysnapshot.docs.map((doc) {
       return doc.data();
     }).toList();
@@ -75,35 +75,32 @@ class EventListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeIndex(int newIndex) {
+  void changeIndex(int newIndex, String uId) {
     selectedIndex = newIndex;
 
     if (selectedIndex == 0) {
-      getAllEvent();
+      getAllEvent(uId);
     } else {
-      getFilterEvent();
+      getFilterEvent(uId);
     }
 
     //getFilterEvent();
   }
 
-  void updateFavouriteFunc(EventModel event) {
+  void updateFavouriteFunc(EventModel event, String uId) {
     // Update the local isFavourite value
     //event.isFavourite = !event.isFavourite;
     print("${event.isFavourite}");
 
-    FirebaseUtilis.getEventCollection()
+    FirebaseUtilis.getEventCollection(uId)
         .doc(event.id)
-        .update({'isFavourite': !event.isFavourite}).timeout(
-      const Duration(milliseconds: 500),
-      onTimeout: () {
-        print("udatedd");
-        print("${event.isFavourite}");
+        .update({'isFavourite': !event.isFavourite}).then((vaue) {
+      print("udatedd");
+      print("${event.isFavourite}");
 
-        selectedIndex == 0 ? getAllEvent() : getFilterEvent();
-        getFavouriteEvent();
-      },
-    );
+      selectedIndex == 0 ? getAllEvent(uId) : getFilterEvent(uId);
+      getFavouriteEvent(uId);
+    });
 
     notifyListeners();
   }

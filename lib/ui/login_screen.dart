@@ -1,3 +1,5 @@
+import 'package:event_planning_ass/firebase_utilis.dart';
+import 'package:event_planning_ass/providers/user_provider.dart';
 import 'package:event_planning_ass/ui/home_screen.dart';
 import 'package:event_planning_ass/ui/register_scree.dart';
 import 'package:event_planning_ass/utilis/app_colors.dart';
@@ -10,6 +12,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String loginScreenId = "LoginScreen";
@@ -111,6 +114,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           .signInWithEmailAndPassword(
                               email: emailController.text,
                               password: passwordController.text);
+
+                      var user = await FirebaseUtilis.readUserFromFireStore(
+                          credential.user?.uid ?? "");
+
+                      if (user == null) {
+                        return;
+                      }
+                      UserProvider userprovider =
+                          Provider.of<UserProvider>(context, listen: false);
+                      userprovider.updateUser(user);
                       DailogUtilis.hideLoading(context: context);
                       DailogUtilis.showMessage(
                           context: context,

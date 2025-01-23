@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_planning_ass/firebase_utilis.dart';
 import 'package:event_planning_ass/model/Event_model.dart';
 import 'package:event_planning_ass/providers/event_list_provider.dart';
+import 'package:event_planning_ass/providers/user_provider.dart';
 import 'package:event_planning_ass/ui/choose_date_or_time.dart';
 import 'package:event_planning_ass/ui/tabs/home_tab/tab_event.dart';
 import 'package:event_planning_ass/utilis/app_colors.dart';
@@ -47,7 +48,6 @@ class _CreateEventState extends State<CreateEvent> {
   @override
   Widget build(BuildContext context) {
     eventprovider = Provider.of<EventListProvider>(context);
-
     Map<String, String> mapListImage = {
       AppLocalizations.of(context)!.sport: AssetManager.sportImage,
       AppLocalizations.of(context)!.birthday: AssetManager.birthdayImage,
@@ -285,13 +285,14 @@ class _CreateEventState extends State<CreateEvent> {
             time: selectedTime!,
             dateTime: selectedDateFocused!,
             image: imageSelected);
-        FirebaseUtilis.addEvent(eventModel).timeout(
-          Duration(milliseconds: 500),
-          onTimeout: () {
-            eventprovider.getAllEvent();
-            Navigator.pop(context);
-          },
-        );
+
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
+
+        FirebaseUtilis.addEvent(eventModel, userProvider.currentuser!.id!)
+            .then((value) {
+          eventprovider.getAllEvent(userProvider.currentuser!.id!);
+          Navigator.pop(context);
+        });
       }
       setState(() {});
 

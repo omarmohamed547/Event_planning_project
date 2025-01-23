@@ -1,3 +1,6 @@
+import 'package:event_planning_ass/firebase_utilis.dart';
+import 'package:event_planning_ass/model/User_model.dart';
+import 'package:event_planning_ass/providers/user_provider.dart';
 import 'package:event_planning_ass/utilis/app_colors.dart';
 import 'package:event_planning_ass/utilis/app_style.dart';
 import 'package:event_planning_ass/utilis/asset_manager.dart';
@@ -7,6 +10,7 @@ import 'package:event_planning_ass/utilis/dailog_utilis.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const String registerScreenId = "RegisterScreen";
@@ -144,9 +148,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         email: emailController.text,
                         password: passwordController.text,
                       );
+                      UserModel userModel = UserModel(
+                          email: emailController.text,
+                          name: nameController.text,
+                          id: credential.user?.uid ?? "");
+                      await FirebaseUtilis.addUserToFireStore(userModel);
+                      UserProvider userprovider =
+                          Provider.of<UserProvider>(context, listen: false);
+                      userprovider.updateUser(userModel);
 
-                      await credential.user
-                          ?.updateProfile(displayName: nameController.text);
+                      //  await credential.user  ?.updateProfile(displayName: nameController.text);
 
                       DailogUtilis.hideLoading(context: context);
                       DailogUtilis.showMessage(

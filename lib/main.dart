@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_planning_ass/providers/app_language_provider.dart';
 import 'package:event_planning_ass/providers/app_theme_provider.dart';
 import 'package:event_planning_ass/providers/event_list_provider.dart';
+import 'package:event_planning_ass/providers/user_provider.dart';
 import 'package:event_planning_ass/ui/OnBoarding_Screen.dart';
 import 'package:event_planning_ass/ui/create_event.dart';
 import 'package:event_planning_ass/ui/home_screen.dart';
@@ -20,8 +21,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await FirebaseFirestore.instance.disableNetwork();
   runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (context) => UserProvider()),
     ChangeNotifierProvider(create: (context) => AppLanguageProvider()),
     ChangeNotifierProvider(create: (context) => AppThemeProvider()),
     ChangeNotifierProvider(create: (context) => EventListProvider())

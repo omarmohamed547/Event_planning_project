@@ -1,5 +1,6 @@
 import 'package:event_planning_ass/model/Event_model.dart';
 import 'package:event_planning_ass/providers/event_list_provider.dart';
+import 'package:event_planning_ass/providers/user_provider.dart';
 import 'package:event_planning_ass/utilis/app_colors.dart';
 import 'package:event_planning_ass/utilis/app_style.dart';
 import 'package:event_planning_ass/utilis/asset_manager.dart';
@@ -27,6 +28,7 @@ class _EventItemState extends State<EventItem> {
   @override
   Widget build(BuildContext context) {
     var eventProvider = Provider.of<EventListProvider>(context);
+    var userprovider = Provider.of<UserProvider>(context);
 
     return Container(
         height: widget.height * 0.24,
@@ -78,7 +80,8 @@ class _EventItemState extends State<EventItem> {
                     onTap: () {
                       setState(() {
                         // Update the database and local state
-                        eventProvider.updateFavouriteFunc(widget.eventModelobj);
+                        eventProvider.updateFavouriteFunc(widget.eventModelobj,
+                            userprovider.currentuser!.id!);
                       });
                     },
                     child: widget.eventModelobj.isFavourite == true
