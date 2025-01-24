@@ -1,4 +1,4 @@
-import 'package:event_planning_ass/ui/login_screen.dart';
+import 'package:event_planning_ass/ui/Login/login_screen.dart';
 import 'package:event_planning_ass/utilis/app_colors.dart';
 import 'package:event_planning_ass/utilis/app_style.dart';
 import 'package:event_planning_ass/utilis/asset_manager.dart';

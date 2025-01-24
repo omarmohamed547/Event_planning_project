@@ -2,7 +2,7 @@ import 'package:event_planning_ass/providers/app_language_provider.dart';
 import 'package:event_planning_ass/providers/app_theme_provider.dart';
 import 'package:event_planning_ass/providers/event_list_provider.dart';
 import 'package:event_planning_ass/providers/user_provider.dart';
-import 'package:event_planning_ass/ui/login_screen.dart';
+import 'package:event_planning_ass/ui/Login/login_screen.dart';
 import 'package:event_planning_ass/ui/tabs/profile_tab/Language_bootom_sheet.dart';
 import 'package:event_planning_ass/ui/tabs/profile_tab/Theme_bottom_sheet.dart';
 import 'package:event_planning_ass/utilis/app_colors.dart';
@@ -50,7 +50,7 @@ class _profileTabState extends State<profileTab> {
                   style: AppStyle.bold24White,
                 ),
                 Text(
-                  '${userprovider.currentuser!.email! ?? 'Not Available'}',
+                  '${FirebaseAuth.instance.currentUser!.email ?? 'Not Available'}',
                   style: AppStyle.Medium16White,
                 )
               ],
