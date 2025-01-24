@@ -1,4 +1,5 @@
 import 'package:event_planning_ass/firebase_utilis.dart';
+import 'package:event_planning_ass/providers/event_list_provider.dart';
 import 'package:event_planning_ass/providers/user_provider.dart';
 import 'package:event_planning_ass/ui/home_screen.dart';
 import 'package:event_planning_ass/ui/register_scree.dart';
@@ -123,7 +124,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                       UserProvider userprovider =
                           Provider.of<UserProvider>(context, listen: false);
+                      EventListProvider eventprovider =
+                          Provider.of<EventListProvider>(context,
+                              listen: false);
                       userprovider.updateUser(user);
+                      eventprovider.getAllEvent(userprovider.currentuser!.id!);
+
+                      eventprovider
+                          .getFavouriteEvent(userprovider.currentuser!.id!);
                       DailogUtilis.hideLoading(context: context);
                       DailogUtilis.showMessage(
                           context: context,

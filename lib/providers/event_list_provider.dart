@@ -104,4 +104,22 @@ class EventListProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  // Delete event
+  void deleteEvent(EventModel event, String uId) async {
+    try {
+      // Delete the event from Firestore
+      await FirebaseUtilis.getEventCollection(uId).doc(event.id).delete();
+
+      // Remove the event from the local list
+      eventsList.removeWhere((e) => e.id == event.id);
+      filterList.removeWhere((e) => e.id == event.id);
+      favouriteList.removeWhere((e) => e.id == event.id);
+
+      // Notify listeners to update the UI
+      notifyListeners();
+    } catch (error) {
+      print("Error deleting event: $error");
+    }
+  }
 }

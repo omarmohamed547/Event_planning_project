@@ -150,7 +150,8 @@ class _profileTabState extends State<profileTab> {
                     backgroundColor: Color(0xffFF5659)),
                 onPressed: () {
                   eventprovider.filterList = [];
-                  // FirebaseAuth.instance.signOut();
+                  //FirebaseAuth.instance.signOut();
+
                   Navigator.of(context).pushReplacementNamed(LoginScreen
                       .loginScreenId); // Navigate to the login screen
                 },
